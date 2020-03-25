@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[512]:
+# In[574]:
 
 
 import os
@@ -9,56 +9,56 @@ cwd = os.getcwd()
 print(cwd)
 
 
-# In[513]:
+# In[576]:
 
 
 os.chdir('/Users/user/desktop')
 
 
-# In[514]:
+# In[577]:
 
 
 import xlrd
 
 
-# In[515]:
+# In[578]:
 
 
 loc = ("RNAseqdata.xls") #this function imports our data and allows to manipulate in the following function
 
 
-# In[516]:
+# In[579]:
 
 
 wb = xlrd.open_workbook(loc)
 
 
-# In[517]:
+# In[580]:
 
 
 sheet = wb.sheet_by_index(0)
 
 
-# In[518]:
+# In[581]:
 
 
 sheet.cell_value(1,4)
 
 
-# In[519]:
+# In[582]:
 
 
 print (sheet.nrows)
 
 
-# In[522]:
+# In[583]:
 
 
 import pandas as pd
 xl = pd.ExcelFile("RNAseqdata.xls")
 
 
-# In[525]:
+# In[584]:
 
 
 cols = ['NAME', 'SCORE']
@@ -70,31 +70,31 @@ df.drop('GENE_TITLE', axis =1, inplace = True)
 df
 
 
-# In[527]:
+# In[585]:
 
 
 df = df.sort_values(by=['SCORE'])
 
 
-# In[528]:
+# In[586]:
 
 
 df #this function arraged our list to output top 5 genes with the highest score and the top 5 genes with the lowest score 
 
 
-# In[529]:
+# In[587]:
 
 
 df_high = df[df['SCORE'] >= 10] #based upon the literature 
 
 
-# In[530]:
+# In[588]:
 
 
 print (df_high [['NAME', 'SCORE']])
 
 
-# In[531]:
+# In[589]:
 
 
 import matplotlib.pyplot as plt 
@@ -102,38 +102,38 @@ import numpy as np
 from matplotlib.ticker import StrMethodFormatter
 
 
-# In[532]:
+# In[590]:
 
 
 df_high.plot(x='NAME', y='SCORE')
 
 
-# In[533]:
+# In[591]:
 
 
 df_low = df[df['SCORE'] <= -1] 
 
 
-# In[534]:
+# In[592]:
 
 
 print (df_low [['NAME', 'SCORE']])
 
 
-# In[535]:
+# In[593]:
 
 
 df_low.plot(x='NAME', y='SCORE')
 
 
-# In[536]:
+# In[594]:
 
 
 import pandas as pd
 xl = pd.ExcelFile("RNAseqdata.xls")
 
 
-# In[537]:
+# In[595]:
 
 
 cols = ['Symbol']
@@ -141,19 +141,19 @@ df = xl.parse("UPR")
 df
 
 
-# In[539]:
+# In[596]:
 
 
 df_upr = xl.parse("UPR")
 
 
-# In[540]:
+# In[597]:
 
 
 print (df_upr)
 
 
-# In[543]:
+# In[598]:
 
 
 from pandas import ExcelWriter
@@ -163,7 +163,7 @@ df_high.to_excel(writer,'one', startrow=0, startcol=2)
 writer.save()
 
 
-# In[544]:
+# In[599]:
 
 
 import pandas as pd
@@ -173,7 +173,7 @@ result = df[df['NAME'].isin(list(df['Symbol']))]
 result
 
 
-# In[545]:
+# In[600]:
 
 
 from pandas import ExcelWriter
@@ -183,7 +183,7 @@ result.to_excel(writer,'one',index=False)
 writer.save()
 
 
-# In[546]:
+# In[601]:
 
 
 import pandas as pd
@@ -193,7 +193,7 @@ import matplotlib.animation as animation
 from IPython.display import HTML
 
 
-# In[570]:
+# In[602]:
 
 
 df = pd.read_excel('UpGraph.xlsx', usecols =['NAME', 'SCORE'])
@@ -203,7 +203,7 @@ ax.text(0, 1.12, 'UPR vs. RNASeq Matching Upregulated Genes',
             transform=ax.transAxes, size=24, weight=600, ha='left')
 
 
-# In[548]:
+# In[603]:
 
 
 from pandas import ExcelWriter
@@ -213,7 +213,7 @@ df_low.to_excel(writer,'one', startrow=0, startcol=2)
 writer.save()
 
 
-# In[549]:
+# In[604]:
 
 
 import pandas as pd
@@ -223,7 +223,7 @@ result = df[df['NAME'].isin(list(df['Symbol']))]
 result
 
 
-# In[550]:
+# In[605]:
 
 
 from pandas import ExcelWriter
@@ -233,7 +233,7 @@ result.to_excel(writer,'one',index=False)
 writer.save()
 
 
-# In[571]:
+# In[606]:
 
 
 df = pd.read_excel('DownGraph.xlsx', usecols =['NAME', 'SCORE'])
@@ -243,7 +243,7 @@ ax.text(0, 1.12, 'UPR vs. RNASeq Matching Downregulated Genes',
             transform=ax.transAxes, size=24, weight=600, ha='left')
 
 
-# In[553]:
+# In[607]:
 
 
 cols = ['Symbol']
@@ -251,19 +251,19 @@ df = xl.parse("Gly")
 df
 
 
-# In[554]:
+# In[608]:
 
 
 df_Gly = xl.parse("Gly")
 
 
-# In[555]:
+# In[609]:
 
 
 print (df_Gly)
 
 
-# In[556]:
+# In[610]:
 
 
 writer = pd.ExcelWriter('GlyUpMatch.xlsx')
@@ -272,7 +272,7 @@ df_high.to_excel(writer,'Sheet1', startrow=0, startcol=2)
 writer.save()
 
 
-# In[557]:
+# In[611]:
 
 
 df = pd.read_excel('GlyUpMatch.xlsx')
@@ -281,7 +281,7 @@ result = df[df['NAME'].isin(list(df['Symbol']))]
 result
 
 
-# In[558]:
+# In[612]:
 
 
 writer = ExcelWriter('GlyUpGraph.xlsx')
@@ -289,7 +289,7 @@ result.to_excel(writer,'Sheet1',index=False)
 writer.save()
 
 
-# In[572]:
+# In[613]:
 
 
 df = pd.read_excel('GlyUpGraph.xlsx', usecols =['NAME', 'SCORE'])
@@ -299,7 +299,7 @@ ax.text(0, 1.12, 'Gly vs. RNASeq Matching Upregulated Genes',
             transform=ax.transAxes, size=24, weight=600, ha='left')
 
 
-# In[560]:
+# In[614]:
 
 
 writer = pd.ExcelWriter('GlyDownMatch.xlsx')
@@ -308,7 +308,7 @@ df_low.to_excel(writer,'Sheet1', startrow=0, startcol=2)
 writer.save()
 
 
-# In[561]:
+# In[615]:
 
 
 df = pd.read_excel('GlyDownMatch.xlsx')
@@ -317,7 +317,7 @@ result = df[df['NAME'].isin(list(df['Symbol']))]
 result
 
 
-# In[562]:
+# In[616]:
 
 
 writer = ExcelWriter('GlyDownGraph.xlsx')
@@ -325,7 +325,7 @@ result.to_excel(writer,'Sheet1',index=False)
 writer.save()
 
 
-# In[573]:
+# In[617]:
 
 
 df = pd.read_excel('GlyDownGraph.xlsx', usecols =['NAME', 'SCORE'])
@@ -333,6 +333,30 @@ fig, ax = plt.subplots(figsize=(8, 4))
 ax.barh(df['NAME'], df['SCORE'])
 ax.text(0, 1.12, 'Gly vs. RNASeq Matching Downregulated Genes',
             transform=ax.transAxes, size=24, weight=600, ha='left')
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
